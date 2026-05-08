@@ -1,15 +1,26 @@
+import { Link } from "react-router";
 
 
 const Footer = () => {
     return (
-      <footer className="footer footer-horizontal footer-center bg-base-300 text-base-content rounded p-10">
-  <nav className="grid grid-flow-col gap-4">
-    <a className="link link-hover">About</a>
+      <footer className="bg-base-300 rounded px-10 pt-10">
+  <div className="flex gap-2 justify-between">
+    <div>
+    <h2 className="font-bold text-xl text-green-600">PawMart</h2>
+    <p>PawMart connects local pet owners and buyers for adoption and pet 
+care products.</p>
+  </div>
+
+  <div>
+    <nav className="grid grid-flow-col gap-4">
+
+    <Link to="/" className="link link-hover">Home</Link>
     <a className="link link-hover">Contact</a>
-    <a className="link link-hover"> Privacy Policy</a>
+    <a className="link link-hover">Policy</a>
+
   </nav>
   <nav>
-    <div className="grid grid-flow-col gap-4">
+    <div className="grid grid-flow-col mt-2.5 gap-4">
       <a>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +56,11 @@ const Footer = () => {
       </a>
     </div>
   </nav>
-  <aside>
-    <p> © {new Date().getFullYear()} GreenNest. All rights reserved.</p>
+  </div>
+  </div>
+
+  <aside >
+    <p className="justify-center flex mt-4 pb-3 "> © {new Date().getFullYear()}<span className="text-green-700 font-semibold ml-1"> PawMart Shops.</span> All rights reserved.</p>
   </aside>
 </footer>
     );
