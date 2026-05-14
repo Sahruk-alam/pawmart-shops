@@ -12,6 +12,8 @@ import MyOrder from './component/Pages/MyOrder.jsx';
 import Login from './component/Users/Login.jsx';
 import SignUp from './component/Users/SignUp.jsx';
 import AuthProvider from './component/AuthProvider/AuthProvider.jsx';
+import DetailsPage from './component/ExtraPage/DetailsPage.jsx';
+import FilterCategory from './component/ExtraPage/FilterCategory.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,8 @@ const router = createBrowserRouter([
       },
       {
         path:"/pets-supplies",
-        element:<PetsSupplies></PetsSupplies>
+        element:<PetsSupplies></PetsSupplies>,
+        loader:()=>fetch("http://localhost:3000/listings")
       },
       {
         path:"/add-listing",
@@ -39,13 +42,21 @@ const router = createBrowserRouter([
         element:<MyOrder></MyOrder>
       },
       {
-    path:"/login",
-    element:<Login></Login>
-  },
-  {
-    path:"/signup",
-    element:<SignUp></SignUp>
-  }
+        path:"/login",
+        element:<Login></Login>
+     },
+     {
+        path:"/signup",
+        element:<SignUp></SignUp>
+     },
+     {
+      path:"/details-page:id",
+      element:<DetailsPage></DetailsPage>
+     },
+     {
+     path: "/category-filtered-product/:categoryName",
+     element:<FilterCategory></FilterCategory>
+     }
     ]
   },
   
