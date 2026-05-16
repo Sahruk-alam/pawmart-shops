@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const PetsSupplies = () => {
 const listings = useLoaderData();
@@ -29,7 +29,7 @@ const listings = useLoaderData();
 
               <p>{item.description}</p>
 
-              <button className="btn btn-primary">See Details</button>
+              <Link to={`/details-page/${item._id}`} className="btn btn-primary">See Details</Link>
             </div>
             
           </div>

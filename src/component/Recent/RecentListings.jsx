@@ -1,4 +1,5 @@
 import { use } from 'react';
+import { Link } from 'react-router';
 
 const RecentListings = ({ recentListing }) => {
     const recent=use(recentListing);
@@ -27,7 +28,7 @@ const RecentListings = ({ recentListing }) => {
 
               <p>{item.description}</p>
 
-              <button className="btn btn-primary">See Details</button>
+              <Link to={`/details-page/${item._id}`} className="btn btn-primary">See Details</Link>
             </div>
             
           </div>

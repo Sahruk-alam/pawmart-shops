@@ -52,12 +52,13 @@ const router = createBrowserRouter([
         element:<SignUp></SignUp>
      },
      {
-      path:"/details-page:id",
-      element:<DetailsPage></DetailsPage>
-     },
-     {
      path: "/category-filtered-product/:categoryName",
      element:<FilterCategory></FilterCategory>
+     },
+     {
+      path:'/details-page/:id',
+      element:<DetailsPage></DetailsPage>,
+      loader:({params})=>fetch(`http://localhost:3000/listings/${params.id}`)
      }
     ]
   },
