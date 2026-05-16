@@ -1,25 +1,85 @@
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
-
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
+import OrderModal from "./OrderModal";
 
 const DetailsPage = () => {
-    const listing = useLoaderData();
-    console.log(listing);
-    return (
-        <div>
-            {
-                <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src={listing.image} alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">{listing.name}</h2>
-                    <p>{listing.description}</p>
-                    <div className="card-actions justify-end">
-                        <span className="text-2xl font-bold">${listing.price.toFixed(2)}</span>
-                    </div>
-                </div>
-                </div>
-            }
+  const listing = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleOrderSubmit = async (orderData) => {
+    try {
+      setLoading(true);
+
+      const res = await fetch("http://localhost:3000/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      const data = await res.json();
+
+      if (data.insertedId) {
+        toast.success("Order placed successfully!");
+        setIsModalOpen(false);
+      } else {
+        toast.error("Failed to place order.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="card bg-base-100 w-96 h-96 shadow-sm">
+        <figure>
+          <img src={listing.image} alt={listing.name} />
+        </figure>
+        <div className="card-body">
+          <div className="w-full flex items-center justify-between">
+            <h2 className="text-lg font-bold"> {listing.name}</h2>
+            <span className="bg-green-600 p-1 rounded-lg text-white font-semibold">
+              {listing.price} BDT
+            </span>
+          </div>
+
+          <div className="w-full gap-4 flex items-center justify-between">
+            <h2>{listing.category}</h2>
+            <span>{listing.location}</span>
+          </div>
+
+          <p>{listing.description}</p>
+          <p className="text-center">{listing.email}</p>
+
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsModalOpen(true)}
+          >
+            {listing.category === "Pets" ? "Adopt Now" : "Order Now"}
+          </button>
         </div>
-    );
+      </div>
+
+      {isModalOpen && (
+        <OrderModal
+          listing={listing}
+          user={user}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleOrderSubmit}
+          loading={loading}
+        />
+      )}
+    </div>
+  );
 };
 
 export default DetailsPage;
