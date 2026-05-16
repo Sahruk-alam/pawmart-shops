@@ -31,7 +31,7 @@ const ExtraSection = () => {
         <div>
             <div className="p-6 bg-amber-50 space-y-10">
 
-      {/* Why Adopt Section */}
+     
       <div>
         <h2 className="text-2xl text-center font-bold mb-4">🐶 Why Adopt from PawMart?</h2>
 

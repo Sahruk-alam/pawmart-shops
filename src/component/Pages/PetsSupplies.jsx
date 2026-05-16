@@ -2,11 +2,12 @@ import { useLoaderData } from "react-router";
 
 const PetsSupplies = () => {
 const listings = useLoaderData();
-    console.log(listings);
   return (
-    
-
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 py-4 mt-4'>
+    <div>
+            <h2 className="text-center mt-3 font-bold text-2xl">{listings.length} Listings</h2>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 py-4 mt-2'>
+         
+         
 
       {
         listings.map((item) => (
@@ -34,6 +35,7 @@ const listings = useLoaderData();
           </div>
         ))
       }
+    </div>
     </div>
   );
 };

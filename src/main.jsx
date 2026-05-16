@@ -14,6 +14,7 @@ import SignUp from './component/Users/SignUp.jsx';
 import AuthProvider from './component/AuthProvider/AuthProvider.jsx';
 import DetailsPage from './component/ExtraPage/DetailsPage.jsx';
 import FilterCategory from './component/ExtraPage/FilterCategory.jsx';
+import PrivateRoutes from './component/PrivateRoutes/PrivateRoutes.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
       },
       {
         path:"/add-listing",
-        element:<AddListing></AddListing>
+        element:<PrivateRoutes><AddListing></AddListing>
+          </PrivateRoutes>
       },
       {
         path:"/my-listing",
