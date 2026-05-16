@@ -35,6 +35,10 @@ const RecentListings = ({ recentListing }) => {
                 ))
             }
         </div>
+        <div>
+          <Link to="/pets-supplies" className="btn p-3 text-blue-700 mt-8 block mx-auto">See All</Link>
+        </div>
+        
         </div>
     );
 };

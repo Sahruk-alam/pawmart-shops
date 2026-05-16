@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { toast } from "react-toastify";
 import OrderModal from "./OrderModal";
+import Swal from "sweetalert2";
 
 const DetailsPage = () => {
   const listing = useLoaderData();
@@ -25,14 +25,26 @@ const DetailsPage = () => {
       const data = await res.json();
 
       if (data.insertedId) {
-        toast.success("Order placed successfully!");
+            Swal.fire({
+          title: "Success",
+          text: "Order Confirmed Successfully!",
+          icon: "success",
+        });
         setIsModalOpen(false);
       } else {
-        toast.error("Failed to place order.");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to place order.",
+          icon: "error"
+        });
       }
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong!");
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong!",
+          icon: "error"
+        });
     } finally {
       setLoading(false);
     }
