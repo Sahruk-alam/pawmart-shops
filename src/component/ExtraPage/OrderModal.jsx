@@ -32,7 +32,7 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
 
   return (
     <div className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-green-600 to-green-700 text-white p-6 flex justify-between items-center">
           <h2 className="text-2xl font-bold">
