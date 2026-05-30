@@ -14,7 +14,7 @@ const FilterCategory = () => {
   }, [categoryName]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-7xl min-h-screen mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8 text-center">
         {categoryName}
       </h1>

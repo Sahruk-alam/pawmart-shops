@@ -2,6 +2,7 @@ import  { use, useState } from "react";
 import { Link,useNavigate } from "react-router";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState("");
    const [showPassword, setShowPassword] = useState(false);
   const navigate=useNavigate()
+  
   const handleRegister = (event) => {
     event.preventDefault();
     const photo = event.target.photo.value;
@@ -44,16 +46,30 @@ const SignUp = () => {
         }).then(() => {
           setUser({...result.user, displayName: name,
             photoURL: photo});
-            navigate( '/');
+            if(result.user){
+              Swal.fire({
+                title: "Success",
+                text: "Account created successfully!",
+                icon: "success"
+              });
+              navigate('/');
+            }
         }).catch((error) => {
-          alert('Error updating profile:', error);
+          Swal.fire({
+            title: "Error!",
+            text: "Error updating profile:",
+            icon: "error"
+          });
           setUser(result.user);
         });
       })
       .catch((error) => {
         const errorMessage = error.message;
-        alert(errorMessage);
-        alert(errorMessage);
+        Swal.fire({
+          title: "Error!",
+          text: errorMessage,
+          icon: "error"
+        });
       });
   }  
     const handleGoogle=()=>{
@@ -63,7 +79,11 @@ const SignUp = () => {
       navigate(location?.state?.from?.pathname || '/');
     })
     .catch(error=>{
-      alert('Error during Google sign-in:', error);
+      Swal.fire({
+        title: "Error!",
+        text: "Error during Google sign-in:",
+        icon: "error"
+      });
     });     
   };
 const handleEye = (event) => {
@@ -123,7 +143,7 @@ const handleEye = (event) => {
             
             <p className="text-center font-semibold pt-3">
               Already have an account?
-              <Link to="/auth/login" className="link text-blue-500">
+              <Link to="/login" className="link text-blue-500">
                 Login
               </Link>
             </p>   

@@ -76,18 +76,15 @@ console.log(data);
             name="name"
             required
             className="w-full border bg-white rounded-lg p-3"
-            placeholder="Enter name"
-          />
+            placeholder="Enter name"/>
         </div>
 
         {/* Category */}
         <div>
           <label className="block mb-1 font-medium">Category</label>
           <select
-            name="category"
-            required
-            className="w-full border bg-white rounded-lg p-3"
-          >
+            name="category" required
+            className="w-full border bg-white rounded-lg p-3" >
             <option value="">Select Category</option>
             <option value="Pets">Pets</option>
             <option value="Pet Food">Pet Food</option>

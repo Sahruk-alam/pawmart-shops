@@ -57,15 +57,13 @@ const router = createBrowserRouter([
      },
      {
       path:'/details-page/:id',
-      element:<DetailsPage></DetailsPage>,
+      element:<privateRoutes><DetailsPage></DetailsPage></privateRoutes>,
       loader:({params})=>fetch(`http://localhost:3000/listings/${params.id}`)
      }
     ]
   },
-  
 
 ]);
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

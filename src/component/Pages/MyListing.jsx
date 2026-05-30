@@ -19,7 +19,7 @@ const MyListing = () => {
     }
   }, [user?.email]);
 
-  // Delete Function
+
   const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -50,14 +50,13 @@ const MyListing = () => {
     });
   };
 
-  // Open Update Modal
   const handleUpdate = (listing) => {
     setSelectedListing(listing);
     setFormData(listing);
     setIsModalOpen(true);
   };
 
-  // Handle Form Input Change
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -66,13 +65,11 @@ const MyListing = () => {
     });
   };
 
-  // Submit Updated Data
   const handleSubmitUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Prepare data - exclude _id and email
       const updateData = {
         name: formData.name,
         category: formData.category,
@@ -134,7 +131,7 @@ const MyListing = () => {
     }
   };
   return (
-    <div className="max-w-6xl bg-gray-100 mx-auto p-5">
+    <div className="max-w-6xl bg-gray-100 mx-auto p-5 min-h-screen">
       <h1 className="text-3xl font-bold mb-5">My Listings</h1>
 
       <div className="overflow-x-auto">
