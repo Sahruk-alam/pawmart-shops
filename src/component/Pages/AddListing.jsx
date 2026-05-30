@@ -62,7 +62,7 @@ console.log(data);
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-2xl my-10">
+    <div className="max-w-3xl mx-auto p-6 bg-gray-100 shadow-lg rounded-2xl my-10">
       <h2 className="text-3xl font-bold text-center mb-8">
         Add New Listing
       </h2>
@@ -71,11 +71,11 @@ console.log(data);
         {/* Product/Pet Name */}
         <div>
           <label className="block mb-1 font-medium">Product/Pet Name</label>
-          <input
+          <input 
             type="text"
             name="name"
             required
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
             placeholder="Enter name"
           />
         </div>
@@ -86,7 +86,7 @@ console.log(data);
           <select
             name="category"
             required
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
           >
             <option value="">Select Category</option>
             <option value="Pets">Pets</option>
@@ -103,7 +103,7 @@ console.log(data);
             type="number"
             name="price"
             min="0"
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
             placeholder="0 for Pets"
           />
         </div>
@@ -115,7 +115,7 @@ console.log(data);
             type="text"
             name="location"
             required
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
             placeholder="Dhaka"
           />
         </div>
@@ -127,7 +127,7 @@ console.log(data);
             name="description"
             required
             rows="4"
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
             placeholder="Write details..."
           ></textarea>
         </div>
@@ -139,7 +139,7 @@ console.log(data);
             type="url"
             name="image"
             required
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
             placeholder="https://example.com/image.jpg"
           />
         </div>
@@ -151,7 +151,7 @@ console.log(data);
             type="date"
             name="date"
             required
-            className="w-full border rounded-lg p-3"
+            className="w-full border bg-white rounded-lg p-3"
           />
         </div>
 
@@ -162,7 +162,7 @@ console.log(data);
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full border rounded-lg p-3 bg-gray-100"
+            className="w-full border bg-white rounded-lg p-3"
           />
         </div>
 

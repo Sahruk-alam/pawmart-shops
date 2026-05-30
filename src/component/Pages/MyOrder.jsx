@@ -58,8 +58,7 @@ const MyOrders = () => {
 
         <button
           onClick={handleDownloadPDF}
-          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg"
-        >
+          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg">
           Download Report
         </button>
       </div>

@@ -37,12 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path:"/my-listing",
-        element:<MyListing></MyListing>
+        element:<PrivateRoutes><MyListing></MyListing></PrivateRoutes>
       },
       {
         path:"/my-orders",
-        element:<PrivateRoutes><MyOrder></MyOrder></PrivateRoutes>,
-        // loader:({params})=>fetch(`http://localhost:3000/orders?email=${params.email}`)
+        element:<PrivateRoutes><MyOrder></MyOrder></PrivateRoutes>
       },
       {
         path:"/login",
