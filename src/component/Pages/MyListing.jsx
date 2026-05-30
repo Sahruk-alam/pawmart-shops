@@ -10,7 +10,6 @@ const MyListing = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
 
-
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:3000/my-listings?email=${user?.email}`)
@@ -73,30 +72,49 @@ const MyListing = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:3000/my-listings/${_id}`,{
-          method: "PUT",  
+      // Prepare data - exclude _id and email
+      const updateData = {
+        name: formData.name,
+        category: formData.category,
+        price: formData.price,
+        location: formData.location,
+        description: formData.description,
+        image: formData.image,
+        date: formData.date,
+      };
+
+      const res = await fetch(
+        `http://localhost:3000/my-listings/${selectedListing._id}`,
+        {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(updateData),
         },
       );
 
       const data = await res.json();
-      if (data.modifiedCount > 0 || data.matchedCount > 0) {
+
+      if (
+        data.acknowledged &&
+        (data.modifiedCount > 0 || data.matchedCount > 0)
+      ) {
         Swal.fire({
           title: "Success!",
           text: "Listing updated successfully.",
           icon: "success",
         });
 
-        // Update local state
+        // Update local state with all field updates
         const updatedListings = listings.map((listing) =>
-          listing._id === selectedListing._id ? formData : listing,
+          listing._id === selectedListing._id
+            ? { ...listing, ...updateData }
+            : listing,
         );
         setListings(updatedListings);
         setIsModalOpen(false);
-        // setSelectedListing(null);
+        setSelectedListing(null);
       } else {
         Swal.fire({
           title: "Error!",
@@ -140,11 +158,13 @@ const MyListing = () => {
                 <td>{listing.location}</td>
 
                 <td className="space-x-2">
-                {/* Update Button */}
-                <button
-                onClick={() => handleUpdate(listing._id)}
-                className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600"
-            >Update</button>
+                  {/* Update Button */}
+                  <button
+                    onClick={() => handleUpdate(listing)}
+                    className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600"
+                  >
+                    Update
+                  </button>
 
                   {/* Delete Button */}
                   <button
@@ -170,10 +190,16 @@ const MyListing = () => {
               {/* Name */}
               <div>
                 <label className="block font-semibold mb-2">
-                  Product/Pet Name </label>
-                <input type="text" name="name" value={formData.name || ""}
-                  onChange={handleInputChange} required
-                  className="w-full border rounded-lg p-3" />
+                  Product/Pet Name{" "}
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name || ""}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full border rounded-lg p-3"
+                />
               </div>
 
               {/* Category */}
@@ -184,7 +210,8 @@ const MyListing = () => {
                   value={formData.category || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full border rounded-lg p-3" >
+                  className="w-full border rounded-lg p-3"
+                >
                   <option value="">Select Category</option>
                   <option value="Pets">Pets</option>
                   <option value="Pet Food">Pet Food</option>
@@ -196,28 +223,40 @@ const MyListing = () => {
               {/* Price */}
               <div>
                 <label className="block font-semibold mb-2">Price</label>
-                <input type="number" name="price"  min="0"
+                <input
+                  type="number"
+                  name="price"
+                  min="0"
                   value={formData.price || ""}
                   onChange={handleInputChange}
-                  className="w-full border rounded-lg p-3" />
+                  className="w-full border rounded-lg p-3"
+                />
               </div>
 
               {/* Location */}
               <div>
                 <label className="block font-semibold mb-2">Location</label>
-                <input  type="text" name="location"
+                <input
+                  type="text"
+                  name="location"
                   value={formData.location || ""}
-                  onChange={handleInputChange} required
-                  className="w-full border rounded-lg p-3" />
+                  onChange={handleInputChange}
+                  required
+                  className="w-full border rounded-lg p-3"
+                />
               </div>
 
               {/* Description */}
               <div>
                 <label className="block font-semibold mb-2">Description</label>
-                <textarea name="description"
+                <textarea
+                  name="description"
                   value={formData.description || ""}
-                  onChange={handleInputChange}  required
-                  rows="4" className="w-full border rounded-lg p-3" />
+                  onChange={handleInputChange}
+                  required
+                  rows="4"
+                  className="w-full border rounded-lg p-3"
+                />
               </div>
 
               {/* Image URL */}
