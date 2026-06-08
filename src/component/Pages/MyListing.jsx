@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const MyListing = () => {
+  usePageTitle("My Listing");
   const { user } = useContext(AuthContext);
   const [listings, setListings] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +20,6 @@ const MyListing = () => {
         .catch((err) => console.error("Error fetching listings:", err));
     }
   }, [user?.email]);
-
 
   const handleDelete = (_id) => {
     Swal.fire({
@@ -55,7 +56,6 @@ const MyListing = () => {
     setFormData(listing);
     setIsModalOpen(true);
   };
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -130,6 +130,13 @@ const MyListing = () => {
       setLoading(false);
     }
   };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   return (
     <div className="max-w-6xl bg-gray-100 mx-auto p-5 min-h-screen">
       <h1 className="text-3xl font-bold mb-5">My Listings</h1>
@@ -139,7 +146,7 @@ const MyListing = () => {
           <thead className="bg-green-600 text-white">
             <tr>
               <th>Name</th>
-              <th>Category</th>
+              <th className="hidden md:block">Category</th>
               <th>Price</th>
               <th>Location</th>
               <th>Actions</th>
@@ -150,7 +157,7 @@ const MyListing = () => {
             {listings.map((listing) => (
               <tr key={listing._id}>
                 <td>{listing.name}</td>
-                <td>{listing.category}</td>
+                <td className="hidden md:block">{listing.category}</td>
                 <td>৳{listing.price}</td>
                 <td>{listing.location}</td>
 

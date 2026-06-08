@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { Link, useLoaderData } from "react-router";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const PetsSupplies = () => {
+  usePageTitle("Pets Supplies");
+  const { loading } = use(AuthContext);
   const listings = useLoaderData();
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -9,7 +13,13 @@ const PetsSupplies = () => {
   const filteredListings = selectedCategory
     ? listings.filter((item) => item.category === selectedCategory)
     : listings;
-
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   return (
     <div>
       <h2 className="text-center mt-5 font-bold text-2xl">

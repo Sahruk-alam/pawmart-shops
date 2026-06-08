@@ -2,10 +2,14 @@ import Slider from "../Animation/Slider";
 import Category from "../Category/Category";
 import ExtraSection from "../ExtraPage/ExtraSection";
 import RecentListings from "../Recent/RecentListings";
-const recentListing = fetch(
-  "http://localhost:3000/recent-listings",
-).then((res) => res.json());
+import usePageTitle from "../../hooks/usePageTitle";
+
+const recentListing = fetch("http://localhost:3000/recent-listings").then(
+  (res) => res.json(),
+);
 const Home = () => {
+  usePageTitle("Home");
+
   return (
     <div className="">
       <Slider></Slider>

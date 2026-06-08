@@ -1,9 +1,15 @@
 import { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const RecentListings = ({ recentListing }) => {
     const recent=use(recentListing);
-    console.log(recent);
+    const {loading}=use(AuthContext)
+    if(loading){
+        return <div className="flex justify-center items-center h-screen">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+    }
     return (
         <div className='bg-gray-100 py-8'>
             <h2 className='text-center text-4xl'>Recent Products</h2>

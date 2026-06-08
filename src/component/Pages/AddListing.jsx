@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const AddListing = () => {
+  usePageTitle("Add Listing");
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -33,19 +35,19 @@ const AddListing = () => {
       });
 
       const data = await res.json();
-console.log(data);
+      console.log(data);
       if (data.insertedId) {
         Swal.fire({
-  title: "Success",
-  text: "Product Added Successfully!",
-  icon: "success",
-});
+          title: "Success",
+          text: "Product Added Successfully!",
+          icon: "success",
+        });
         form.reset();
       } else {
         Swal.fire({
           title: "Error!",
           text: "Failed to add listing.",
-          icon: "error"
+          icon: "error",
         });
       }
     } catch (error) {
@@ -53,38 +55,38 @@ console.log(data);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!",
-        icon: "error"
+        icon: "error",
       });
     } finally {
-      
-        setLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-100 shadow-lg rounded-2xl my-10">
-      <h2 className="text-3xl font-bold text-center mb-8">
-        Add New Listing
-      </h2>
+      <h2 className="text-3xl font-bold text-center mb-8">Add New Listing</h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Product/Pet Name */}
         <div>
           <label className="block mb-1 font-medium">Product/Pet Name</label>
-          <input 
+          <input
             type="text"
             name="name"
             required
             className="w-full border bg-white rounded-lg p-3"
-            placeholder="Enter name"/>
+            placeholder="Enter name"
+          />
         </div>
 
         {/* Category */}
         <div>
           <label className="block mb-1 font-medium">Category</label>
           <select
-            name="category" required
-            className="w-full border bg-white rounded-lg p-3" >
+            name="category"
+            required
+            className="w-full border bg-white rounded-lg p-3"
+          >
             <option value="">Select Category</option>
             <option value="Pets">Pets</option>
             <option value="Pet Food">Pet Food</option>

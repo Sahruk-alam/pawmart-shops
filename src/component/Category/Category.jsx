@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const Category = () => {
     return (
 
-       <div className="my-6 ">
+       <div className="my-6">
         <h2 className="text-center py-3 font-bold text-xl md:text-2xl">Categories</h2>
         
 <div className="flex flex-col md:flex-row gap-2 justify-center items-center text-center">

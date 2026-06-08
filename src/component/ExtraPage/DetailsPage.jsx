@@ -3,9 +3,11 @@ import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import OrderModal from "./OrderModal";
 import Swal from "sweetalert2";
+import usePageTitle from "../../hooks/usePageTitle";
 
 const DetailsPage = () => {
   const listing = useLoaderData();
+  usePageTitle(`${listing?.name || "Details"}`);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,6 +65,13 @@ const DetailsPage = () => {
       setLoading(false);
     }
   };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <>
