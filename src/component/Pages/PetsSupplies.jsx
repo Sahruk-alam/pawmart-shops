@@ -8,11 +8,18 @@ const PetsSupplies = () => {
   const { loading } = use(AuthContext);
   const listings = useLoaderData();
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter listings based on selected category
-  const filteredListings = selectedCategory
-    ? listings.filter((item) => item.category === selectedCategory)
-    : listings;
+  // Filter listings based on selected category and search term
+  const filteredListings = listings.filter((item) => {
+    const matchCategory =
+      !selectedCategory || item.category === selectedCategory;
+    const matchSearch =
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchCategory && matchSearch;
+  });
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -20,28 +27,49 @@ const PetsSupplies = () => {
       </div>
     );
   }
+
   return (
-    <div>
-      <h2 className="text-center mt-5 font-bold text-2xl">
+    <div className="px-4 py-8">
+      <h2 className="text-center font-bold text-2xl mb-6">
         {filteredListings.length} Listings
       </h2>
 
-      <div className="w-full flex justify-end mt-4 px-4">
-        <select
-          name="category"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-50 border bg-white rounded-lg p-3"
-        >
-          <option value="">All Categories</option>
-          <option value="Pets">Pets</option>
-          <option value="Pet Food">Pet Food</option>
-          <option value="Accessories">Accessories</option>
-          <option value="Pet Care Products">Pet Care Products</option>
-        </select>
+      {/* Category and Search Bar Layout */}
+      <div className="flex justify-between gap-6 mb-8">
+
+        {/* Left Side - Categories */}
+        <div className="md:col-span-1">
+          <div className="bg-base-100 rounded-lg p-4">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full  border-gray-300 rounded-lg px-4 py-3 
+              focus:outline-none focus:ring-2 focus:ring-green-600">
+              <option value="">All Categories</option>
+              <option value="Pets">Pets</option>
+              <option value="Pet Food">Pet Food</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Pet Care Products">Pet Care Products</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Right Side - Search Bar */}
+        <div className="md:col-span-2">
+          <div className="bg-base-100 rounded-lg p-4">
+            <input
+              type="text"
+              placeholder="Search by name or description..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 py-4 mt-2">
+      {/* Listings Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
         {filteredListings.map((item) => (
           <div key={item._id} className="card bg-base-100 w-96 h-96 shadow-sm">
             <figure>

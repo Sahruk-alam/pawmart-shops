@@ -15,6 +15,7 @@ import AuthProvider from './component/AuthProvider/AuthProvider.jsx';
 import DetailsPage from './component/ExtraPage/DetailsPage.jsx';
 import FilterCategory from './component/ExtraPage/FilterCategory.jsx';
 import PrivateRoutes from './component/PrivateRoutes/PrivateRoutes.jsx';
+import ErrorPage from './component/ExtraPage/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
      }
     ]
   },
+  {
+    path:"*",
+    element:<ErrorPage />
+  }
 
 ]);
 

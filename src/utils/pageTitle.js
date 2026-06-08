@@ -1,7 +1,3 @@
-/**
- * Route configuration with page titles
- * This can be used as reference for managing page titles
- */
 
 export const routeTitles = {
   "/": "Home",
