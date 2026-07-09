@@ -22,14 +22,24 @@ const PetsSupplies = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="grid mt-39 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 min-h-screen">
+        {
+          filteredListings.map(() => (
+    <div className="flex w-96 flex-col gap-4">
+  <div className="skeleton h-47 w-full"></div>
+  <div className="skeleton h-4 w-28"></div>
+  <div className="skeleton h-4 w-full"></div>
+  <div className="skeleton h-4 w-full"></div>
+</div>
+          ))
+        }
+    
       </div>
     );
   }
 
   return (
-    <div className="px-4 py-8">
+    <div className="px-4 py-8 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <h2 className="text-center font-bold text-2xl mb-6">
         {filteredListings.length} Listings
       </h2>
@@ -39,12 +49,11 @@ const PetsSupplies = () => {
 
         {/* Left Side - Categories */}
         <div className="md:col-span-1">
-          <div className="bg-base-100 rounded-lg p-4">
+          <div className="bg-base-100 rounded-lg p-4 border border-base-300">
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full  border-gray-300 rounded-lg px-4 py-3 
-              focus:outline-none focus:ring-2 focus:ring-green-600">
+              className="w-full border border-base-300 bg-base-100 rounded-lg px-4 py-3 text-base-content focus:outline-none focus:ring-2 focus:ring-green-600">
               <option value="">All Categories</option>
               <option value="Pets">Pets</option>
               <option value="Pet Food">Pet Food</option>
@@ -56,13 +65,13 @@ const PetsSupplies = () => {
 
         {/* Right Side - Search Bar */}
         <div className="md:col-span-2">
-          <div className="bg-base-100 rounded-lg p-4">
+          <div className="bg-base-100 rounded-lg p-4 border border-base-300">
             <input
               type="text"
               placeholder="Search by name or description..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+              className="w-full border border-base-300 bg-base-100 rounded-lg px-4 py-3 text-base-content focus:outline-none focus:ring-2 focus:ring-green-600"
             />
           </div>
         </div>
@@ -71,7 +80,7 @@ const PetsSupplies = () => {
       {/* Listings Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
         {filteredListings.map((item) => (
-          <div key={item._id} className="card bg-base-100 w-96 h-96 shadow-sm">
+          <div key={item._id} className="card bg-base-100 text-base-content w-96 h-96 shadow-sm border border-base-300">
             <figure>
               <img src={item.image} alt={item.name} />
             </figure>
@@ -88,11 +97,11 @@ const PetsSupplies = () => {
                 <span>{item.location}</span>
               </div>
 
-              <p>{item.description}</p>
+              <p className="text-base-content/80">{item.description}</p>
 
               <Link
                 to={`/details-page/${item._id}`}
-                className="btn btn-primary"
+                className="btn btn-primary text-primary-content"
               >
                 See Details
               </Link>

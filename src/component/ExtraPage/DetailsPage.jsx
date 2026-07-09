@@ -2,8 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import OrderModal from "./OrderModal";
-import Swal from "sweetalert2";
 import usePageTitle from "../../hooks/usePageTitle";
+import { fireThemedAlert } from "../../utils/themedAlert";
 
 const DetailsPage = () => {
   const listing = useLoaderData();
@@ -16,7 +16,7 @@ const DetailsPage = () => {
   // Check if user is logged in, if not redirect to login
   useEffect(() => {
     if (!user) {
-      Swal.fire({
+      fireThemedAlert({
         title: "Please Login",
         text: "You need to login to view this page",
         icon: "warning",
@@ -41,14 +41,14 @@ const DetailsPage = () => {
       const data = await res.json();
 
       if (data.insertedId) {
-        Swal.fire({
+        fireThemedAlert({
           title: "Success",
           text: "Order Confirmed Successfully!",
           icon: "success",
         });
         setIsModalOpen(false);
       } else {
-        Swal.fire({
+        fireThemedAlert({
           title: "Error!",
           text: "Failed to place order.",
           icon: "error",
@@ -56,7 +56,7 @@ const DetailsPage = () => {
       }
     } catch (error) {
       console.error(error);
-      Swal.fire({
+      fireThemedAlert({
         title: "Error!",
         text: "Something went wrong!",
         icon: "error",
@@ -76,12 +76,12 @@ const DetailsPage = () => {
   return (
     <>
       {!user ? (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-          <p className="text-lg text-gray-600">Redirecting to login...</p>
+        <div className="min-h-screen  flex items-center justify-center transition-colors duration-300">
+          <p className="text-lg ">Redirecting to login...</p>
         </div>
       ) : (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-          <div className="card bg-base-100 w-96 h-96 shadow-sm">
+        <div className="min-h-screen flex items-center justify-center transition-colors duration-300 px-4 py-10">
+          <div className="card bg-base-100 text-base-content w-96 h-96 shadow-sm border border-base-300">
             <figure>
               <img src={listing.image} alt={listing.name} />
             </figure>
@@ -99,10 +99,12 @@ const DetailsPage = () => {
               </div>
 
               <p>{listing.description}</p>
-              <p className="text-center">{listing.email}</p>
+              <p className="text-center text-base-content/80">
+                {listing.email}
+              </p>
 
               <button
-                className="btn btn-primary"
+                className="btn btn-primary text-primary-content"
                 onClick={() => setIsModalOpen(true)}
               >
                 {listing.category === "Pets" ? "Adopt Now" : "Order Now"}

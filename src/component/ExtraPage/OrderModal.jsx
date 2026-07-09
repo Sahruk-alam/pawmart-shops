@@ -31,10 +31,10 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-base-100 text-base-content rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-base-300">
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-green-600 to-green-700 text-white p-6 flex justify-between items-center">
+        <div className="sticky top-0 bg-green-600 dark:bg-green-700 text-white p-6 flex justify-between items-center">
           <h2 className="text-2xl font-bold">
             {listing.category === "Pets" ? "Adoption Form" : "Order Form"}
           </h2>
@@ -50,59 +50,59 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Buyer Name */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold ">
               Buyer Name
             </label>
             <input
               type="text"
               value={user?.displayName || ""}
               readOnly
-              className="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 text-gray-700"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold">
               Email
             </label>
             <input
               type="email"
               value={user?.email || ""}
               readOnly
-              className="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 text-gray-700"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 "
             />
           </div>
 
           {/* Product/Listing ID */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold ">
               Product ID
             </label>
             <input
               type="text"
               value={listing._id}
               readOnly
-              className="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 text-gray-700 font-mono text-sm"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 0 font-mono text-sm"
             />
           </div>
 
           {/* Product/Listing Name */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold ">
               Product Name
             </label>
             <input
               type="text"
               value={listing.name}
               readOnly
-              className="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 text-gray-700"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 "
             />
           </div>
 
           {/* Quantity */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold ">
               Quantity {listing.category === "Pets" && "(Fixed for Pets)"}
             </label>
             <input
@@ -114,38 +114,39 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
                 setQuantity(parseInt(e.target.value) || 1)
               }
               readOnly={listing.category === "Pets"}
-              className={`w-full border border-gray-300 rounded-lg p-3 ${
-                listing.category === "Pets" ? "bg-gray-100 text-gray-700" : ""
+              className={`w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 ${
+                listing.category === "Pets"
+                  ? ""
+                  : "bg-base-100"
               }`}
             />
           </div>
 
           {/* Price */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold ">
               Unit Price (BDT)
             </label>
             <input
               type="number"
               value={listing.price}
               readOnly
-              className="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 text-gray-700"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 "
             />
           </div>
 
-          {/* Total Price */}
-          <div className="bg-blue-50 p-3 rounded-lg border-2 border-blue-200">
-            <label className="block mb-2 font-medium text-gray-700">
+          <div className=" p-3 rounded-lg border-2 border-blue-200 dark:border-blue-800">
+            <label className="block mb-2 font-medium">
               Total Price (BDT)
             </label>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-semibold ">
               {listing.price * (listing.category === "Pets" ? 1 : quantity)} BDT
             </div>
           </div>
 
           {/* Address */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
               Address
             </label>
             <textarea
@@ -153,14 +154,14 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
               onChange={(e) => setAddress(e.target.value)}
               required
               rows="2"
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 bg-base-100 text-base-content"
               placeholder="Enter delivery address"
             ></textarea>
           </div>
 
           {/* Pickup Date */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
               {listing.category === "Pets" ? "Adoption Date" : "Pickup Date"} *
             </label>
             <input
@@ -168,13 +169,13 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 bg-base-100 text-base-content"
             />
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
               Phone Number *
             </label>
             <input
@@ -182,21 +183,21 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 bg-base-100 text-base-content"
               placeholder="01700000000"
             />
           </div>
 
           {/* Additional Notes */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
               Additional Notes
             </label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows="3"
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full border border-gray-300 dark:border-slate-700 rounded-lg p-3 bg-base-100 text-base-content"
               placeholder="Any special requests or notes (optional)"
             ></textarea>
           </div>
@@ -207,8 +208,11 @@ const OrderModal = ({ listing, user, onClose, onSubmit, loading }) => {
               type="button"
               onClick={onClose}
               className="flex-1 bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition"
-              disabled={loading}>Cancel</button>          
-              <button
+              disabled={loading}
+            >
+              Cancel
+            </button>
+            <button
               type="submit"
               disabled={loading}
               className="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:bg-gray-400"

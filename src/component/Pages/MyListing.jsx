@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import usePageTitle from "../../hooks/usePageTitle";
+import { fireThemedAlert } from "../../utils/themedAlert";
 
 const MyListing = () => {
   usePageTitle("My Listing");
@@ -22,7 +22,7 @@ const MyListing = () => {
   }, [user?.email]);
 
   const handleDelete = (_id) => {
-    Swal.fire({
+    fireThemedAlert({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
@@ -36,11 +36,11 @@ const MyListing = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-              Swal.fire(
-                "Deleted!",
-                "Your listing has been deleted.",
-                "success",
-              );
+              fireThemedAlert({
+                title: "Deleted!",
+                text: "Your listing has been deleted.",
+                icon: "success",
+              });
               const remaining = listings.filter(
                 (listing) => listing._id !== _id,
               );
@@ -97,7 +97,7 @@ const MyListing = () => {
         data.acknowledged &&
         (data.modifiedCount > 0 || data.matchedCount > 0)
       ) {
-        Swal.fire({
+        fireThemedAlert({
           title: "Success!",
           text: "Listing updated successfully.",
           icon: "success",
@@ -113,7 +113,7 @@ const MyListing = () => {
         setIsModalOpen(false);
         setSelectedListing(null);
       } else {
-        Swal.fire({
+        fireThemedAlert({
           title: "Error!",
           text: "Failed to update listing.",
           icon: "error",
@@ -121,7 +121,7 @@ const MyListing = () => {
       }
     } catch (error) {
       console.error(error);
-      Swal.fire({
+      fireThemedAlert({
         title: "Error!",
         text: "Something went wrong!",
         icon: "error",
@@ -138,11 +138,11 @@ const MyListing = () => {
     );
   }
   return (
-    <div className="max-w-6xl bg-gray-100 mx-auto p-5 min-h-screen">
+    <div className="max-w-6xl mx-auto p-5 min-h-screen  transition-colors duration-300">
       <h1 className="text-3xl font-bold mb-5">My Listings</h1>
 
       <div className="overflow-x-auto">
-        <table className="table w-full">
+        <table className="table w-full bg-base-100 text-base-content rounded-xl overflow-hidden">
           <thead className="bg-green-600 text-white">
             <tr>
               <th>Name</th>
@@ -187,7 +187,7 @@ const MyListing = () => {
       {/* Update Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-lg max-w-xl w-full max-h-[70vh] overflow-y-auto p-6">
+          <div className="bg-base-100 text-base-content rounded-lg shadow-lg max-w-xl w-full max-h-[70vh] overflow-y-auto p-6 border border-base-300">
             <h2 className="text-2xl font-bold mb-6">Edit Listing</h2>
 
             <form onSubmit={handleSubmitUpdate} className="space-y-4">
@@ -202,7 +202,7 @@ const MyListing = () => {
                   value={formData.name || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 />
               </div>
 
@@ -214,7 +214,7 @@ const MyListing = () => {
                   value={formData.category || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 >
                   <option value="">Select Category</option>
                   <option value="Pets">Pets</option>
@@ -233,7 +233,7 @@ const MyListing = () => {
                   min="0"
                   value={formData.price || ""}
                   onChange={handleInputChange}
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 />
               </div>
 
@@ -246,7 +246,7 @@ const MyListing = () => {
                   value={formData.location || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 />
               </div>
 
@@ -259,7 +259,7 @@ const MyListing = () => {
                   onChange={handleInputChange}
                   required
                   rows="4"
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 />
               </div>
 
@@ -272,7 +272,7 @@ const MyListing = () => {
                   value={formData.image || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 />
               </div>
 
@@ -285,7 +285,7 @@ const MyListing = () => {
                   value={formData.date || ""}
                   onChange={handleInputChange}
                   required
-                  className="w-full border rounded-lg p-3"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-100 text-base-content"
                 />
               </div>
 
@@ -297,7 +297,7 @@ const MyListing = () => {
                   name="email"
                   value={formData.email || ""}
                   readOnly
-                  className="w-full border rounded-lg p-3 bg-gray-100"
+                  className="w-full border border-base-300 rounded-lg p-3 bg-base-200 text-base-content"
                 />
               </div>
 

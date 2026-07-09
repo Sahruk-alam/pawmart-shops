@@ -64,8 +64,8 @@ const Login = () => {
       });
   };
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="card py-6 bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="flex justify-center items-center min-h-screen px-4 py-12  transition-colors duration-300">
+      <div className="card py-6 bg-base-100 text-base-content w-full max-w-sm shrink-0 shadow-2xl border border-base-300">
         <h2 className="font-bold text-2xl text-center">Login Your Account</h2>
         <form onSubmit={handleLogin} className="card-body">
           <fieldset className="fieldset">
@@ -74,7 +74,7 @@ const Login = () => {
               type="email"
               name="email"
               required
-              className="input"
+              className="input input-bordered w-full"
               placeholder="Enter your Email"
               ref={emailRef}
             />
@@ -83,32 +83,43 @@ const Login = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="input"
+                className="input input-bordered w-full"
                 name="password"
                 placeholder="Password"
               />
-              <button className="absolute top-4 right-5  " onClick={handleEye}>
+              <button className="absolute top-4 right-5" onClick={handleEye}>
                 {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
               </button>
             </div>
             <div>
-              <a onClick={handleForget} className="link link-hover">
+              <a
+                onClick={handleForget}
+                className="link link-hover text-green-600 dark:text-green-400"
+              >
                 Forgot password?
               </a>
             </div>
             {error && <p className="text-red-600 font-semibold">{error}</p>}
-            <button className="btn btn-neutral mt-4">Login</button>
+            <button className="btn btn-primary text-primary-content mt-4">
+              Login
+            </button>
 
             <p className="text-center font-semibold pt-3">
               Don't have an account?
-              <Link to="/signup" className="link text-blue-500">
+              <Link
+                to="/signup"
+                className="link text-blue-600 dark:text-blue-400"
+              >
                 Register
               </Link>
             </p>
           </fieldset>
         </form>
         <div className="card  px-6">
-          <button onClick={handleGoogle} className="btn text-black outline-1">
+          <button
+            onClick={handleGoogle}
+            className="btn btn-outline text-base-content outline-1"
+          >
             <svg
               aria-label="Google logo"
               width="18"

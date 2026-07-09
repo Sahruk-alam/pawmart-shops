@@ -3,11 +3,11 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-      <footer className="bg-base-300 rounded px-10 pt-10">
+      <footer className="bg-base-300/90 text-base-content rounded px-10 pt-10">
   <div className="flex gap-2 justify-between">
     <div>
-    <h2 className="font-bold text-xl text-green-600">PawMart</h2>
-    <p>PawMart connects local pet owners and buyers for adoption and pet 
+    <h2 className="font-bold text-xl text-green-600 dark:text-green-400">PawMart</h2>
+    <p className="max-w-md text-base-content/80">PawMart connects local pet owners and buyers for adoption and pet 
 care products.</p>
   </div>
 
@@ -60,7 +60,7 @@ care products.</p>
   </div>
 
   <aside >
-    <p className="justify-center flex mt-4 pb-3 "> © {new Date().getFullYear()}<span className="text-green-700 font-semibold ml-1"> PawMart Shops.</span> All rights reserved.</p>
+    <p className="justify-center flex mt-4 pb-3 text-base-content/80"> © {new Date().getFullYear()}<span className="text-green-700 dark:text-green-400 font-semibold ml-1"> PawMart Shops.</span> All rights reserved.</p>
   </aside>
 </footer>
     );

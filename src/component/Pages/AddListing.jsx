@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import Swal from "sweetalert2";
 import usePageTitle from "../../hooks/usePageTitle";
+import { fireThemedAlert } from "../../utils/themedAlert";
 
 const AddListing = () => {
   usePageTitle("Add Listing");
@@ -37,14 +37,14 @@ const AddListing = () => {
       const data = await res.json();
       console.log(data);
       if (data.insertedId) {
-        Swal.fire({
+        fireThemedAlert({
           title: "Success",
           text: "Product Added Successfully!",
           icon: "success",
         });
         form.reset();
       } else {
-        Swal.fire({
+        fireThemedAlert({
           title: "Error!",
           text: "Failed to add listing.",
           icon: "error",
@@ -52,7 +52,7 @@ const AddListing = () => {
       }
     } catch (error) {
       console.error(error);
-      Swal.fire({
+      fireThemedAlert({
         title: "Error!",
         text: "Something went wrong!",
         icon: "error",
@@ -63,7 +63,7 @@ const AddListing = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-gray-100 shadow-lg rounded-2xl my-10">
+    <div className="max-w-3xl mx-auto p-6 bg-base-100 text-base-content shadow-lg rounded-2xl my-10 border border-base-300">
       <h2 className="text-3xl font-bold text-center mb-8">Add New Listing</h2>
 
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -74,7 +74,7 @@ const AddListing = () => {
             type="text"
             name="name"
             required
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
             placeholder="Enter name"
           />
         </div>
@@ -85,7 +85,7 @@ const AddListing = () => {
           <select
             name="category"
             required
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
           >
             <option value="">Select Category</option>
             <option value="Pets">Pets</option>
@@ -102,7 +102,7 @@ const AddListing = () => {
             type="number"
             name="price"
             min="0"
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
             placeholder="0 for Pets"
           />
         </div>
@@ -114,7 +114,7 @@ const AddListing = () => {
             type="text"
             name="location"
             required
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
             placeholder="Dhaka"
           />
         </div>
@@ -126,7 +126,7 @@ const AddListing = () => {
             name="description"
             required
             rows="4"
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
             placeholder="Write details..."
           ></textarea>
         </div>
@@ -138,7 +138,7 @@ const AddListing = () => {
             type="url"
             name="image"
             required
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
             placeholder="https://example.com/image.jpg"
           />
         </div>
@@ -150,7 +150,7 @@ const AddListing = () => {
             type="date"
             name="date"
             required
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-100 rounded-lg p-3 text-base-content"
           />
         </div>
 
@@ -161,7 +161,7 @@ const AddListing = () => {
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full border bg-white rounded-lg p-3"
+            className="w-full border border-base-300 bg-base-200 rounded-lg p-3 text-base-content"
           />
         </div>
 

@@ -16,15 +16,17 @@ const FilterCategory = () => {
   }, [categoryName]);
 
   return (
-    <div className="max-w-7xl min-h-screen mx-auto px-4 py-10">
+    <div className="max-w-7xl min-h-screen mx-auto px-4 py-10 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <h1 className="text-3xl font-bold mb-8 text-center">{categoryName}</h1>
 
       {products.length === 0 ? (
-        <p className="text-center text-gray-500">No products found.</p>
+        <p className="text-center text-gray-500 dark:text-gray-400">
+          No products found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((item) => (
-            <div className="card bg-base-100 w-96 h-96 shadow-sm">
+            <div className="card bg-base-100 text-base-content w-96 h-96 shadow-sm border border-base-300">
               <figure>
                 <img src={item.image} alt={item.name} />
               </figure>
@@ -43,7 +45,9 @@ const FilterCategory = () => {
 
                 <p>{item.description}</p>
 
-                <button className="btn btn-primary">See Details</button>
+                <button className="btn btn-primary text-primary-content">
+                  See Details
+                </button>
               </div>
             </div>
           ))}

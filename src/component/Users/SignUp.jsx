@@ -2,8 +2,8 @@ import { use, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import Swal from "sweetalert2";
 import usePageTitle from "../../hooks/usePageTitle";
+import { fireThemedAlert } from "../../utils/themedAlert";
 
 const SignUp = () => {
   usePageTitle("Sign Up");
@@ -50,7 +50,7 @@ const SignUp = () => {
           .then(() => {
             setUser({ ...result.user, displayName: name, photoURL: photo });
             if (result.user) {
-              Swal.fire({
+              fireThemedAlert({
                 title: "Success",
                 text: "Account created successfully!",
                 icon: "success",
@@ -58,8 +58,8 @@ const SignUp = () => {
               navigate("/");
             }
           })
-          .catch((error) => {
-            Swal.fire({
+          .catch(() => {
+            fireThemedAlert({
               title: "Error!",
               text: "Error updating profile:",
               icon: "error",
@@ -69,7 +69,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        Swal.fire({
+        fireThemedAlert({
           title: "Error!",
           text: errorMessage,
           icon: "error",
@@ -82,8 +82,8 @@ const SignUp = () => {
         setUser(result.user);
         navigate(location?.state?.from?.pathname || "/");
       })
-      .catch((error) => {
-        Swal.fire({
+      .catch(() => {
+        fireThemedAlert({
           title: "Error!",
           text: "Error during Google sign-in:",
           icon: "error",
@@ -95,8 +95,8 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="card py-6  bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="flex justify-center items-center min-h-screen px-4 py-12  transition-colors duration-300">
+      <div className="card py-6 bg-base-100 text-base-content w-full max-w-sm shrink-0 shadow-2xl border border-base-300">
         <h2 className="font-bold text-2xl text-center">
           Register your account
         </h2>
@@ -107,7 +107,7 @@ const SignUp = () => {
               type="text"
               name="name"
               required
-              className="input"
+              className="input input-bordered w-full"
               placeholder="Enter your Name"
             />
             {nameError && (
@@ -118,7 +118,7 @@ const SignUp = () => {
               type="text"
               name="photo"
               required
-              className="input"
+              className="input input-bordered w-full"
               placeholder="Enter your Photo URL"
             />
 
@@ -127,7 +127,7 @@ const SignUp = () => {
               type="email"
               name="email"
               required
-              className="input"
+              className="input input-bordered w-full"
               placeholder="Enter your Email"
             />
             {emailError && (
@@ -137,7 +137,7 @@ const SignUp = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                className="input"
+                className="input input-bordered w-full"
                 name="password"
                 placeholder="Password"
               />
@@ -156,23 +156,34 @@ const SignUp = () => {
                 id="terms"
                 className="mr-2"
               />
-              <p>Agree to terms and conditions</p>
+              <p className="text-base-content/80">
+                Agree to terms and conditions
+              </p>
             </div>
 
-            <button type="submit" className="btn btn-neutral mt-2">
+            <button
+              type="submit"
+              className="btn btn-primary text-primary-content mt-2"
+            >
               Register
             </button>
 
             <p className="text-center font-semibold pt-3">
               Already have an account?
-              <Link to="/login" className="link text-blue-500">
+              <Link
+                to="/login"
+                className="link text-blue-600 dark:text-blue-400"
+              >
                 Login
               </Link>
             </p>
           </fieldset>
         </form>
         <div className="card  px-6">
-          <button onClick={handleGoogle} className="btn text-black outline-1">
+          <button
+            onClick={handleGoogle}
+            className="btn btn-outline text-base-content outline-1"
+          >
             <svg
               aria-label="Google logo"
               width="18"
